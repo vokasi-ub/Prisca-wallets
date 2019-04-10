@@ -54,7 +54,7 @@ Route::get('tambahdatakatalog','KatalogController@create');
 Route::get('hapuskatalog/{id}','KatalogController@destroy');
 
 /* menampilkan halaman order */
-Route::resource('detailorder', 'OrderController');
+Route::resource('order', 'OrderController');
 /* crud order */
 Route::get('editorder/{id}','OrderController@edit');
 Route::post('updateorder/{id}','OrderController@update');

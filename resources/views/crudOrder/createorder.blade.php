@@ -34,8 +34,8 @@
                     <input title="harga total"type="text" name="harga_total" autocomplete="off" required class="form-control">
 			</div><br>
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-tags"></i> Tanggal Waktu Order </span>
-                    <input title="tanggal waktu"type="datetime" name="tanggal_waktu_order" autocomplete="off" required class="form-control">
+                <span class="input-group-addon"><i class="fa fa-tags"></i> Tanggal Order </span>
+                    <input title="tanggal "type="date" name="tanggal" autocomplete="off" required class="form-control">
 			</div><br>
 				
 		</div>

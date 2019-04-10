@@ -15,8 +15,6 @@ class CreateKatalog extends Migration
     {
         Schema::create('katalog', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('idKatalog');
-            $table->integer('idKategori');
             $table->string('pict');
             $table->string('nama_produk');
             $table->text('detail');

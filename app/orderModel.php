@@ -8,5 +8,5 @@ class orderModel extends Model
 {
     //
     protected $table = 'order';
-    protected $fillabel = ['id','jumlah_order','total','total_harga','tanggal_waktu_order'];
+    protected $fillabel = ['id','jumlah_order','total','total_harga','tanggal'];
 }

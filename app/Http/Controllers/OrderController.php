@@ -21,7 +21,7 @@ class OrderController extends Controller
         $cari = $request->q;
         //mencari data di database
         $dataorder = DB::table('order')
-        ->where('id','like',"%".$cari."%")
+        ->where('jumlah_order','like',"%".$cari."%")
         ->paginate();
         //return data ke view
         return view('dashboard.order', compact('dataorder'));
@@ -51,10 +51,10 @@ class OrderController extends Controller
             'jumlah_order' => $request->jumlah_order,
             'harga' => $request->harga,
             'harga_total' => $request->harga_total,
-            'tanggal_waktu_order' => $request->tanggal_waktu_order
+            'tanggal' => $request->tanggal
           ]);
 
-        return redirect('detailorder');
+        return redirect('order');
     }
 
     /**
@@ -96,7 +96,7 @@ class OrderController extends Controller
            
             'id' => $request->id,
         ]);
-        return redirect('detailorder');
+        return redirect('order');
     }
 
     /**
@@ -109,6 +109,6 @@ class OrderController extends Controller
     {
         //
         DB::table('order')->where('id', $id)->delete();
-        return redirect('detailorder');
+        return redirect('order');
     }
 }

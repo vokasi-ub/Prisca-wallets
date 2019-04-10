@@ -3,7 +3,7 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">DETAIL ORDERAN</h3>
@@ -35,9 +35,9 @@
             
                     <th>{{ $row->id }}</th>
                     <th>{{ $row->jumlah_order }}</th>
-                    <th>{{ $row->total }}</th>
-                    <th>{{ $row->total_harga }}</th>
-                    <th>{{ $row->tanggal_waktu_order }}</th>
+                    <th>{{ $row->harga }}</th>
+                    <th>{{ $row->harga_total }}</th>
+                    <th>{{ $row->tanggal }}</th>
                     <th> 
                         <a href="editorder/{{$row->id}}">Edit</a>
                         <a href="hapusorder/{{$row->id}}">Delete</a>

@@ -15,11 +15,10 @@ class CreateOrder extends Migration
     {
         Schema::create('order', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('idOrder');
             $table->string('jumlah_order');
             $table->string('harga');
             $table->string('harga_total');
-            $table->datetime('tanggal_waktu_order');
+            $table->date('tanggal');
             $table->timestamps();
         });
     }
