@@ -7,7 +7,7 @@
 			 <div class="box">
              @foreach ($dataorder as $row2)
 
-	   <form action="{{ url('updateorder/'.$row2->id) }}" class="form-horizontal" method="post" enctype="multipart/form-data">
+	   <form action="{{ url('updateorder/'.$row2->idOrder) }}" class="form-horizontal" method="post" enctype="multipart/form-data">
 	   {{ csrf_field() }}
         <div class="box-header with-border">
           <h3 class="box-title"><i class="fa fa-tags"></i> Form edit data detail order</h3>
@@ -18,11 +18,15 @@
           </div>
         </div>
 		<div class="box-body">
-              
-				<div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-tags"></i> ID Order </span>
-                <input title="ID Order"type="text" name="id" autocomplete="off" required class="form-control" value="{{$row2->id}}">
-				</div><br>
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-tags"></i>Nama Produk </span>
+                <select name="idKatalog_fk" class="form-control">
+                    @foreach  ($jenis as $row)
+                    <option value="{{ $row->idKatalog }}">{{ $row->nama_produk}}</option>
+                    @endforeach
+                    </select>
+                    </div></div></div>
+
                 <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-tags"></i> Jumlah Order </span>
                 <input title="Jumlah Order"type="text" name="jumlah_order" autocomplete="off" required class="form-control" value="{{$row2->jumlah_order}}">
@@ -37,7 +41,7 @@
 				</div><br>
                 <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-tags"></i> Tanggal Order </span>
-                <input title="tanggal"type="date" name="tanggal" autocomplete="off" required class="form-control" value="{{$row2->tanggal_waktu_order}}">
+                <input title="tanggal"type="date" name="tanggal" autocomplete="off" required class="form-control" value="{{$row2->tanggal}}">
 				</div><br>
 
 				

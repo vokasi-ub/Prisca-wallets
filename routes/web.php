@@ -38,27 +38,27 @@ Route::get('katalog', function () {
 /* menampilkan halaman kategori */
 Route::resource('kategori', 'HomeController');
 /* crud kategori */
-Route::get('editkategori/{id}','HomeController@edit');
-Route::post('updatekategori/{id}','HomeController@update');
+Route::get('editkategori/{idKategori}','HomeController@edit');
+Route::post('updatekategori/{idKategori}','HomeController@update');
 Route::post('tambahkategori','HomeController@store');
 Route::get('tambahdata','HomeController@create');
-Route::get('hapuskategori/{id}','HomeController@destroy');
+Route::get('hapuskategori/{idKategori}','HomeController@destroy');
 
 /* menampilkan halaman katalog */
 Route::resource('katalog', 'katalogController');
 /* crud katalog */
-Route::get('editkatalog/{id}','KatalogController@edit');
-Route::post('updatekatalog/{id}','KatalogController@update');
+Route::get('editkatalog/{idKatalog}','KatalogController@edit');
+Route::post('updatekatalog/{idKatalog}','KatalogController@update');
 Route::post('tambahkatalog','KatalogController@store');
 Route::get('tambahdatakatalog','KatalogController@create');
-Route::get('hapuskatalog/{id}','KatalogController@destroy');
+Route::get('hapuskatalog/{idKatalog}','KatalogController@destroy');
 
 /* menampilkan halaman order */
 Route::resource('order', 'OrderController');
 /* crud order */
-Route::get('editorder/{id}','OrderController@edit');
-Route::post('updateorder/{id}','OrderController@update');
+Route::get('editorder/{idOrder}','OrderController@edit');
+Route::post('updateorder/{idOrder}','OrderController@update');
 Route::post('tambahorder','OrderController@store');
 Route::get('tambahdataorder','OrderController@create');
-Route::get('hapusorder/{id}','OrderController@destroy');
+Route::get('hapusorder/{idOrder}','OrderController@destroy');
 

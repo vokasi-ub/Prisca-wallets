@@ -16,11 +16,15 @@
           </div>
         </div>
 		<div class="box-body">
-       
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-tags"></i> ID Katalog </span>
-                    <input title="ID Katalog" type="text" name="id" autocomplete="off" required class="form-control">
-			</div><br>
+            <span class="input-group-addon"><i class="fa fa-tags"></i>Jenis Kategori </span>
+                <select name="idKategori_fk" class="form-control">
+                    @foreach  ($data as $row)
+                    <option value="{{ $row->idKategori }}">{{ $row->jenis_kategori}}</option>
+                    @endforeach
+                    </select>
+                    </div></div></div>
+       
             <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-tags"></i>Pict </span>
                     <input title="Pict" type="text" name="pict" autocomplete="off" required class="form-control">

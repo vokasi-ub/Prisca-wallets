@@ -24,18 +24,18 @@
                 <tr>
                   <th>ID Kategori</th>
                   <th>Jenis Kategori</th>
-                  <th>Options</th>
+                  <th>Opsi</th>
                 </tr>
                 
                 @foreach ($datakategori as $row)
                 <tr>
             
                     
-                    <th>{{ $row->id}}</th>
+                    <th>{{ $row->idKategori}}</th>
                     <th>{{ $row->jenis_kategori}}</th>
                     <th> 
-                        <a href="editkategori/{{$row->id}}">Edit</a>
-                        <a href="hapuskategori/{{$row->id}}">Delete</a>
+                        <a href="editkategori/{{$row->idKategori}}">Edit</a>
+                        <a href="hapuskategori/{{$row->idKategori}}">Delete</a>
                     </tr>
                 @endforeach
               </table>

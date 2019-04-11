@@ -7,9 +7,9 @@
           <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">DETAIL ORDERAN</h3>
-              <form action="#" method="get" class="sidebar-form">
+              <form action=""  class="sidebar-form">
                   <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
+                    <input type="text" name="keyword" class="form-control" placeholder="Search...">
                       <span class="input-group-btn">
                       <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                       </button>
@@ -23,24 +23,26 @@
               <table class="table table-bordered" style="width: auto">
                 <tr>
                   <th>ID Order</th>
+                  <th>Nama Produk</th>
                   <th>Jumlah Order</th>
-                  <th>Total</th>
+                  <th>harga</th>
                   <th>Total Harga</th>
                   <th>Tanggal Order</th>
-                  <th>Options</th>
+                  <th>Opsi</th>
                 </tr>
                 
                 @foreach ($dataorder as $row)
                 <tr>
             
-                    <th>{{ $row->id }}</th>
+                    <th>{{ $row->idOrder }}</th>
+                    <th>{{ $row->get_katalog->nama_produk}}</th>
                     <th>{{ $row->jumlah_order }}</th>
                     <th>{{ $row->harga }}</th>
                     <th>{{ $row->harga_total }}</th>
                     <th>{{ $row->tanggal }}</th>
                     <th> 
-                        <a href="editorder/{{$row->id}}">Edit</a>
-                        <a href="hapusorder/{{$row->id}}">Delete</a>
+                        <a href="editorder/{{$row->idOrder}}">Edit</a>
+                        <a href="hapusorder/{{$row->idOrder}}">Delete</a>
                     </tr>
                 @endforeach
               </table>

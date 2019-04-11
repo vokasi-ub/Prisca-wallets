@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use DB;
 use App\orderModel;
+use App\katalogModel;
 
 use Illuminate\Http\Request;
 
@@ -17,13 +18,18 @@ class OrderController extends Controller
     {
         /** return view('dashboard.dashboard'); */
 
-        //mendefinisikan kata kunci
-        $cari = $request->q;
-        //mencari data di database
-        $dataorder = DB::table('order')
-        ->where('jumlah_order','like',"%".$cari."%")
-        ->paginate();
-        //return data ke view
+        // //mendefinisikan kata kunci
+        // $cari = $request->q;
+        // //mencari data di database
+        // $dataorder = DB::table('order')
+        // ->where('jumlah_order','like',"%".$cari."%")
+        // ->paginate();
+        // //return data ke view
+
+        //with untuk mengambil fungsi dari model, when buat search
+        $dataorder = orderModel::with(['get_katalog'])->when($request->keyword, function ($query) use ($request){
+            $query->where('nama_produk', 'like', "%{$request->keyword}%");
+            })->get();
         return view('dashboard.order', compact('dataorder'));
     }
 
@@ -34,7 +40,8 @@ class OrderController extends Controller
      */
     public function create()
     {
-        return view('crudorder.createorder');
+        $data = katalogModel::all();
+        return view('crudorder.createorder',compact('data'));
     }
 
     /**
@@ -47,7 +54,8 @@ class OrderController extends Controller
     {
         //
         DB::table('order')->insert([
-            'id' => $request->id,
+            'idOrder' => $request->idOrder,
+            'idKatalog_fk' => $request->idKatalog_fk,
             'jumlah_order' => $request->jumlah_order,
             'harga' => $request->harga,
             'harga_total' => $request->harga_total,
@@ -63,9 +71,10 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($idOrder)
     {
         //
+        $data = katalogModel::all();
         return view('crudorder.createorder');
     }
 
@@ -75,11 +84,12 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($idOrder)
     {
         //
-        $dataorder = DB::table('order')->where('id',$id)->get();
-        return view('crudorder.editorder', compact('dataorder'));
+        $jenis = katalogModel::all();
+        $dataorder = DB::table('order')->where('idOrder',$idOrder)->get();
+        return view('crudorder.editorder', compact('dataorder', 'jenis'));
     }
 
     /**
@@ -89,12 +99,17 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $idOrder)
     {
         //
-        DB::table('order')->where('id',$id)->update([
-           
-            'id' => $request->id,
+        DB::table('order')->where('idOrder',$idOrder)->update([
+            'idOrder' => $request->idOrder,
+            'idKatalog_fk' => $request->idKatalog_fk,
+            'jumlah_order' => $request->jumlah_order,
+            'harga' => $request->harga,
+            'harga_total' => $request->harga_total,
+            'tanggal' => $request->tanggal
+
         ]);
         return redirect('order');
     }
@@ -105,10 +120,10 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($idOrder)
     {
         //
-        DB::table('order')->where('id', $id)->delete();
+        DB::table('order')->where('idOrder', $idOrder)->delete();
         return redirect('order');
     }
 }

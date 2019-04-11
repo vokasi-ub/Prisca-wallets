@@ -14,7 +14,8 @@ class CreateOrder extends Migration
     public function up()
     {
         Schema::create('order', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('idOrder');
+            $table->integer('idKatalog_fk');
             $table->string('jumlah_order');
             $table->string('harga');
             $table->string('harga_total');

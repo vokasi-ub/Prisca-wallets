@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\katalogModel;
+use App\kategoriModel;
 
 class KatalogController extends Controller
 {
@@ -15,13 +16,18 @@ class KatalogController extends Controller
      */
     public function index(Request $request)
     {
-        //mendefinisikan kata kunci
-        $cari = $request->q;
-        //mencari data di database
-        $datakatalog = DB::table('katalog')
-        ->where('nama_produk','like',"%".$cari."%")
-        ->paginate();
-        //return data ke view
+        // //mendefinisikan kata kunci
+        // $cari = $request->q;
+        // //mencari data di database
+        // $datakatalog = DB::table('katalog')
+        // ->where('nama_produk','like',"%".$cari."%")
+        // ->paginate();
+        // //return data ke view
+
+        //with untuk mengambil fungsi dari model, when buat search
+        $datakatalog = katalogModel::with(['get_kategori'])->when($request->keyword, function ($query) use ($request){
+            $query->where('nama_produk', 'like', "%{$request->keyword}%");
+            })->get();
         return view('dashboard.katalog', compact('datakatalog'));
 
     }
@@ -34,7 +40,8 @@ class KatalogController extends Controller
     public function create()
     {
         //
-        return view('crudkatalog.createkatalog');
+        $data = kategoriModel::all();
+        return view('crudkatalog.createkatalog',compact('data'));
     }
 
     /**
@@ -47,7 +54,8 @@ class KatalogController extends Controller
     {
         //
         DB::table('katalog')->insert([
-            'id' => $request->id,
+            'idKatalog' => $request->idKatalog,
+            'idKategori_fk' => $request->idKategori_fk,
             'pict' => $request->pict,
             'nama_produk' => $request->nama_produk,
             'detail' => $request->detail,
@@ -64,9 +72,10 @@ class KatalogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($idKatalog)
     {
         //
+        $data = kategoriModel::all();
         return view('crudkatalog.createkatalog');
 
     }
@@ -77,11 +86,12 @@ class KatalogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($idKatalog)
     {
         //
-        $datakatalog = DB::table('katalog')->where('id',$id)->get();
-        return view('crudkatalog.editkatalog', compact('datakatalog'));
+        $jenis = kategoriModel::all();
+        $datakatalog = DB::table('katalog')->where('idKatalog',$idKatalog)->get();
+        return view('crudkatalog.editkatalog', compact('datakatalog','jenis'));
     }
 
     /**
@@ -91,12 +101,18 @@ class KatalogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $idKatalog)
     {
         //
-        DB::table('katalog')->where('id',$id)->update([
-           
-            'nama_produk' => $request->nama_produk
+        DB::table('katalog')->where('idKatalog',$idKatalog)->update([
+            
+            'idKatalog' => $request->idKatalog,
+            'idKategori_fk' => $request->idKategori_fk, 
+            'pict' => $request->pict,
+            'nama_produk' => $request->nama_produk,
+            'detail' => $request->detail,
+            'harga' => $request->harga,
+            'stok' => $request->stok
         ]);
         return redirect('katalog');
     }
@@ -107,10 +123,10 @@ class KatalogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($idKatalog)
     {
         //
-        DB::table('katalog')->where('id', $id)->delete();
+        DB::table('katalog')->where('idKatalog', $idKatalog)->delete();
         return redirect('katalog');
     }
 }

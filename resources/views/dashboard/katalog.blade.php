@@ -7,11 +7,11 @@
           <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">KATALOG</h3>
-              <form action="#" method="get" class="sidebar-form">
+              <form action="" class="sidebar-form">
                   <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
+                    <input type="text" name="keyword" class="form-control" placeholder="Search...">
                       <span class="input-group-btn">
-                      <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                      <button type="submit" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                       </button>
                       </span>
                   </div>
@@ -23,26 +23,28 @@
               <table class="table table-bordered" style="width: auto">
                 <tr>
                   <th>ID Katalog</th>
+                  <th>Jenis Kategori</th>
                   <th>Foto Produk</th>
                   <th>Nama Produk</th>
                   <th>Detail</th>
                   <th>Harga Produk</th>
                   <th>Stok</th>
-                  <th>Options</th>
+                  <th>Opsi</th>
                 </tr>
                 <?php $no=1; ?>
                 @foreach ($datakatalog as $row)
                 <tr>
             
-                    <th>{{ $row->id }}</th>
+                    <th>{{ $row->idKatalog }}</th>
+                    <th>{{ $row->get_kategori->jenis_kategori}}</th>
                     <th>{{ $row->pict }}</th>
                     <th>{{ $row->nama_produk}}</th>
                     <th>{{ $row->detail }}</th>
                     <th>{{ $row->harga }}</th>
                     <th>{{ $row->stok }}</th>
                     <th> 
-                        <a href="editkatalog/{{$row->id}}">Edit</a>
-                        <a href="hapuskatalog/{{$row->id}}">Delete</a>
+                        <a href="editkatalog/{{$row->idKatalog}}">Edit</a>
+                        <a href="hapuskatalog/{{$row->idKatalog}}">Delete</a>
                     </tr>
                 @endforeach
               </table>

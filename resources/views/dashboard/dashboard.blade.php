@@ -12,9 +12,11 @@
     </section>
     <br>
 
+    <center>
     <img src="{{ asset('tema/dist/img/wallt1.png') }}" >
     <!-- <button class="btn-flat"> Buy </button> -->
     <img src="{{ asset('tema/dist/img/wallt2.png') }}" >
+    </center>
 
 @endsection
 

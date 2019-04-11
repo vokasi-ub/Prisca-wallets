@@ -48,17 +48,17 @@ class HomeController extends Controller
         return redirect('kategori');
     }
 
-    public function edit($id)
+    public function edit($idKategori)
     {
         //
-        $datakategori = DB::table('kategori')->where('id',$id)->get();
+        $datakategori = DB::table('kategori')->where('idKategori',$idKategori)->get();
         return view('crudkategori.editkategori', compact('datakategori'));
     }
 
     public function update(Request $request, $id)
     {
         //
-        DB::table('kategori')->where('id',$id)->update([
+        DB::table('kategori')->where('idKategori',$idKategori)->update([
            
             'jenis_kategori' => $request->jenis_kategori,
         ]);
@@ -71,16 +71,16 @@ class HomeController extends Controller
         return view('crudkategori.createkategori');
     }
 
-    public function show($id)
+    public function show($idKategori)
     {
         //
         return view('crudkategori.createkategori');
     }
 
-    public function destroy($id)
+    public function destroy($idKategori)
     {
         //
-        DB::table('kategori')->where('id', $id)->delete();
+        DB::table('kategori')->where('idKategori', $idKategori)->delete();
         return redirect('kategori');
     }
 
