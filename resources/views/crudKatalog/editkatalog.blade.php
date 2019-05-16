@@ -28,7 +28,7 @@
                     </div></div></div>
        
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-tags"></i>Pict </span>
+                <span class="input-group-addon"><i class="fa fa-tags"></i>Warna Produk </span>
                     <input title="Pict"type="text" name="pict" autocomplete="off" required class="form-control" value="{{$row2->pict}}">
 			</div><br>
             <div class="input-group">

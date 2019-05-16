@@ -31,17 +31,16 @@ class HomeController extends Controller
         //mendefinisikan kata kunci
         $cari = $request->q;
         //mencari data di database
-        $datakategori = DB::table('kategori')
-        ->where('jenis_kategori','like',"%".$cari."%")
-        ->paginate();
+        $datakategori = kategoriModel::where('jenis_kategori','like',"%".$cari."%")->paginate();
         //return data ke view
         return view('dashboard.kategori', compact('datakategori'));
+
     }
 
     public function store(Request $request)
     {
         //
-        DB::table('kategori')->insert([
+        kategoriModel::insert([
             'jenis_kategori' => $request->jenis_kategori
           ]);
 
@@ -51,14 +50,14 @@ class HomeController extends Controller
     public function edit($idKategori)
     {
         //
-        $datakategori = DB::table('kategori')->where('idKategori',$idKategori)->get();
+        $datakategori = kategoriModel::where('idKategori',$idKategori)->get();
         return view('crudkategori.editkategori', compact('datakategori'));
     }
 
     public function update(Request $request, $id)
     {
         //
-        DB::table('kategori')->where('idKategori',$idKategori)->update([
+        kategoriModel::where('idKategori',$idKategori)->update([
            
             'jenis_kategori' => $request->jenis_kategori,
         ]);
@@ -80,7 +79,7 @@ class HomeController extends Controller
     public function destroy($idKategori)
     {
         //
-        DB::table('kategori')->where('idKategori', $idKategori)->delete();
+        kategoriModel::where('idKategori', $idKategori)->delete();
         return redirect('kategori');
     }
 

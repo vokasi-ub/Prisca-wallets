@@ -28,7 +28,7 @@ class OrderController extends Controller
 
         //with untuk mengambil fungsi dari model, when buat search
         $dataorder = orderModel::with(['get_katalog'])->when($request->keyword, function ($query) use ($request){
-            $query->where('nama_produk', 'like', "%{$request->keyword}%");
+            $query->where('jumlah_order', 'like', "%{$request->keyword}%");
             })->get();
         return view('dashboard.order', compact('dataorder'));
     }
@@ -53,7 +53,7 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         //
-        DB::table('order')->insert([
+        orderModel::insert([
             'idOrder' => $request->idOrder,
             'idKatalog_fk' => $request->idKatalog_fk,
             'jumlah_order' => $request->jumlah_order,
@@ -88,7 +88,7 @@ class OrderController extends Controller
     {
         //
         $jenis = katalogModel::all();
-        $dataorder = DB::table('order')->where('idOrder',$idOrder)->get();
+        $dataorder = orderModel::where('idOrder',$idOrder)->get();
         return view('crudorder.editorder', compact('dataorder', 'jenis'));
     }
 
@@ -102,7 +102,7 @@ class OrderController extends Controller
     public function update(Request $request, $idOrder)
     {
         //
-        DB::table('order')->where('idOrder',$idOrder)->update([
+        orderModel::where('idOrder',$idOrder)->update([
             'idOrder' => $request->idOrder,
             'idKatalog_fk' => $request->idKatalog_fk,
             'jumlah_order' => $request->jumlah_order,
@@ -123,7 +123,7 @@ class OrderController extends Controller
     public function destroy($idOrder)
     {
         //
-        DB::table('order')->where('idOrder', $idOrder)->delete();
+        orderModel::where('idOrder', $idOrder)->delete();
         return redirect('order');
     }
 }

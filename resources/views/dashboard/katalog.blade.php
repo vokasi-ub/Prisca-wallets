@@ -24,7 +24,7 @@
                 <tr>
                   <th>ID Katalog</th>
                   <th>Jenis Kategori</th>
-                  <th>Foto Produk</th>
+                  <th>Warna Produk</th>
                   <th>Nama Produk</th>
                   <th>Detail</th>
                   <th>Harga Produk</th>
